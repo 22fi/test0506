@@ -2,10 +2,11 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
-import { DashboardPage } from './pages/DashboardPage';
 import { CommutePage } from './pages/CommutePage';
+import { DashboardPage } from './pages/DashboardPage';
 import { LandingPage } from './pages/LandingPage';
 import { LoginPage } from './pages/LoginPage';
+import { NotesPage } from './pages/NotesPage';
 import { RegisterPage } from './pages/RegisterPage';
 
 export default function App() {
@@ -30,6 +31,14 @@ export default function App() {
               element={
                 <ProtectedRoute>
                   <CommutePage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/notes"
+              element={
+                <ProtectedRoute>
+                  <NotesPage />
                 </ProtectedRoute>
               }
             />

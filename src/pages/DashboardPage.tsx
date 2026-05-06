@@ -14,26 +14,27 @@ interface DashboardData {
 
 const TOOL_CARDS = [
   {
-    icon: '◎',
+    icon: 'NT',
+    title: 'メモ',
+    desc: '短いメモ、再開ポイント、買い物メモなどを一覧で管理できます。',
+    to: '/notes',
+    badge: 'Available',
+  },
+  {
+    icon: 'RT',
     title: '通勤ルート',
-    desc: '登録した駅ペアを基準に、運行情報と代替ルート確認をひとつにまとめています。',
+    desc: '登録した駅ペアを基準に、運行情報と代替ルート確認をまとめています。',
     to: '/commute',
     badge: 'Available',
   },
   {
-    icon: '◇',
-    title: 'メモ',
-    desc: '短いメモや再開ポイントを残す生活ツールの追加先として確保しています。',
-    badge: 'Coming Soon',
-  },
-  {
-    icon: '↗',
+    icon: 'LK',
     title: 'リンク整理',
     desc: '毎日使う外部サービスへの動線をまとめる拡張候補です。',
     badge: 'Coming Soon',
   },
   {
-    icon: '◌',
+    icon: 'RC',
     title: 'ルーチン',
     desc: '日常の確認作業や簡単な反復タスクを置く余地があります。',
     badge: 'Coming Soon',
@@ -111,13 +112,13 @@ export function DashboardPage() {
           <section className="dashboard-feature-callout card">
             <div>
               <p className="dashboard-feature-label">Featured</p>
-              <h2 className="dashboard-feature-title">通勤ルートをすぐ確認</h2>
+              <h2 className="dashboard-feature-title">メモをすぐ残せるように</h2>
               <p className="dashboard-feature-text">
-                最寄り駅と目的地を保存しておくと、リアルタイム運行情報の確認と代替ルート検索をすぐ開けます。
+                思いついたことをその場で保存して、あとから一覧で見返せます。買い物メモや再開ポイントの管理にも向いています。
               </p>
             </div>
-            <Link to="/commute" className="btn btn-primary">
-              通勤ルートを開く
+            <Link to="/notes" className="btn btn-primary">
+              メモを開く
             </Link>
           </section>
 

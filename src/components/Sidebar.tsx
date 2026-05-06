@@ -10,6 +10,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { icon: 'DB', label: 'ダッシュボード', to: '/dashboard' },
+  { icon: 'NT', label: 'メモ', to: '/notes' },
   { icon: 'RT', label: '通勤ルート', to: '/commute' },
 ];
 
