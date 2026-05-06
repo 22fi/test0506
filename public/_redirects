@@ -1,0 +1,3 @@
+/* /api/* は Pages Functions が処理するため、除外 */
+/api/* /api/:splat 200
+/* /index.html 200

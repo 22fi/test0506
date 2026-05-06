@@ -1,0 +1,50 @@
+// src/components/Sidebar.tsx
+import { NavLink } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
+import './Sidebar.css';
+
+interface NavItem {
+  icon: string;
+  label: string;
+  to: string;
+}
+
+const NAV_ITEMS: NavItem[] = [
+  { icon: '🏠', label: 'ダッシュボード', to: '/dashboard' },
+  // 将来の機能をここに追加
+  // { icon: '⚙️', label: '設定', to: '/settings' },
+];
+
+export function Sidebar() {
+  const { user } = useAuth();
+
+  return (
+    <aside className="sidebar">
+      <span className="sidebar-section-title">メニュー</span>
+
+      {NAV_ITEMS.map((item) => (
+        <NavLink
+          key={item.to}
+          to={item.to}
+          className={({ isActive }) => `sidebar-link${isActive ? ' active' : ''}`}
+        >
+          <span className="sidebar-link-icon">{item.icon}</span>
+          {item.label}
+        </NavLink>
+      ))}
+
+      <div className="sidebar-spacer" />
+
+      {user && (
+        <div className="sidebar-user">
+          <div className="sidebar-user-info">
+            <div className="sidebar-avatar">
+              {user.username.charAt(0).toUpperCase()}
+            </div>
+            <span className="sidebar-username">{user.username}</span>
+          </div>
+        </div>
+      )}
+    </aside>
+  );
+}

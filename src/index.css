@@ -1,0 +1,280 @@
+/* ============================================
+   グローバルスタイル & テーマ変数
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── ダークテーマ（デフォルト） ── */
+:root,
+:root[data-theme="dark"] {
+  --bg-primary:     #0c0c14;
+  --bg-secondary:   #13131f;
+  --bg-card:        #1a1a2e;
+  --bg-card-hover:  #20203a;
+  --bg-input:       #0f0f1a;
+  --text-primary:   #e8e8f4;
+  --text-secondary: #9090b8;
+  --text-muted:     #5c5c80;
+  --accent:         #7c6dfa;
+  --accent-hover:   #9d8fff;
+  --accent-soft:    rgba(124, 109, 250, 0.12);
+  --success:        #4ade80;
+  --success-soft:   rgba(74, 222, 128, 0.12);
+  --error:          #f87171;
+  --error-soft:     rgba(248, 113, 113, 0.12);
+  --border:         rgba(255, 255, 255, 0.08);
+  --border-hover:   rgba(255, 255, 255, 0.16);
+  --shadow:         0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-sm:      0 2px 8px rgba(0, 0, 0, 0.3);
+  --glass-bg:       rgba(26, 26, 46, 0.8);
+  --glass-border:   rgba(255, 255, 255, 0.1);
+  --sidebar-width:  240px;
+}
+
+/* ── ライトテーマ ── */
+:root[data-theme="light"] {
+  --bg-primary:     #f0f0f8;
+  --bg-secondary:   #fafaff;
+  --bg-card:        #ffffff;
+  --bg-card-hover:  #f5f5ff;
+  --bg-input:       #f8f8ff;
+  --text-primary:   #1a1a2e;
+  --text-secondary: #5050a0;
+  --text-muted:     #9090c0;
+  --accent:         #6055e0;
+  --accent-hover:   #4845c8;
+  --accent-soft:    rgba(96, 85, 224, 0.1);
+  --success:        #16a34a;
+  --success-soft:   rgba(22, 163, 74, 0.1);
+  --error:          #dc2626;
+  --error-soft:     rgba(220, 38, 38, 0.1);
+  --border:         rgba(0, 0, 0, 0.1);
+  --border-hover:   rgba(0, 0, 0, 0.2);
+  --shadow:         0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-sm:      0 2px 8px rgba(0, 0, 0, 0.08);
+  --glass-bg:       rgba(255, 255, 255, 0.85);
+  --glass-border:   rgba(0, 0, 0, 0.1);
+}
+
+/* ── リセット & ベース ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* ── ボタン ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(124, 109, 250, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(124, 109, 250, 0.4);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-danger {
+  background: var(--error-soft);
+  color: var(--error);
+  border: 1px solid transparent;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: var(--error);
+  color: #fff;
+}
+
+.btn-lg {
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  border-radius: 12px;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* ── フォーム ── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.form-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+  width: 100%;
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.form-input.error {
+  border-color: var(--error);
+  box-shadow: 0 0 0 3px var(--error-soft);
+}
+
+/* ── アラート ── */
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.alert-error {
+  background: var(--error-soft);
+  color: var(--error);
+  border: 1px solid rgba(248, 113, 113, 0.2);
+}
+
+.alert-success {
+  background: var(--success-soft);
+  color: var(--success);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+}
+
+/* ── カード ── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── スクロールバー ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-hover);
+}
+
+/* ── アニメーション ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* ── ユーティリティ ── */
+.text-center { text-align: center; }
+.text-muted  { color: var(--text-muted); font-size: 0.85rem; }
+.mt-1 { margin-top: 0.25rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-4 { margin-top: 1rem; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.gap-2 { gap: 0.5rem; }
