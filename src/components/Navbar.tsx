@@ -20,8 +20,8 @@ export function Navbar({ showAuth = true }: NavbarProps) {
   return (
     <nav className="navbar">
       <Link to={user ? '/dashboard' : '/'} className="navbar-brand">
-        <div className="navbar-brand-icon">◎</div>
-        MyTools
+        <div className="navbar-brand-icon">MT</div>
+        <span>MyTools</span>
       </Link>
       <div className="navbar-spacer" />
       <div className="navbar-actions">
@@ -29,7 +29,7 @@ export function Navbar({ showAuth = true }: NavbarProps) {
           className="theme-toggle"
           onClick={toggleTheme}
           aria-label="テーマを切り替える"
-          title={theme === 'dark' ? 'ライトモードに切り替え' : 'ダークモードに切り替え'}
+          title={theme === 'dark' ? 'ライトモードへ切り替え' : 'ダークモードへ切り替え'}
         >
           {theme === 'dark' ? '☀' : '☾'}
         </button>

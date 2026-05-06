@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { Sidebar } from '../components/Sidebar';
 import { useAuth } from '../contexts/AuthContext';
@@ -14,34 +14,36 @@ interface DashboardData {
 
 const TOOL_CARDS = [
   {
-    icon: '🚉',
+    icon: '◎',
     title: '通勤ルート',
-    desc: '最寄り駅と目的地を登録して、運行状況と代替検索をまとめて確認できます。',
+    desc: '登録した駅ペアを基準に、運行情報と代替ルート確認をひとつにまとめています。',
     to: '/commute',
-    badge: 'New',
+    badge: 'Available',
   },
   {
-    icon: '📝',
+    icon: '◇',
     title: 'メモ',
-    desc: '次に追加しやすい軽量ツールの候補です。',
+    desc: '短いメモや再開ポイントを残す生活ツールの追加先として確保しています。',
     badge: 'Coming Soon',
   },
   {
-    icon: '🔗',
-    title: 'URL短縮',
-    desc: '共有用リンクを整理するツール枠として確保しています。',
+    icon: '↗',
+    title: 'リンク整理',
+    desc: '毎日使う外部サービスへの動線をまとめる拡張候補です。',
     badge: 'Coming Soon',
   },
   {
-    icon: '⏱',
-    title: 'タイマー',
-    desc: '作業用タイマーや簡易ポモドーロなどを載せられる余地です。',
+    icon: '◌',
+    title: 'ルーチン',
+    desc: '日常の確認作業や簡単な反復タスクを置く余地があります。',
     badge: 'Coming Soon',
   },
 ];
 
 function formatDate(dateStr: string | null): string {
-  if (!dateStr) return '未記録';
+  if (!dateStr) {
+    return '未記録';
+  }
 
   return new Date(dateStr.endsWith('Z') ? dateStr : `${dateStr}Z`).toLocaleString('ja-JP', {
     year: 'numeric',
@@ -75,30 +77,30 @@ export function DashboardPage() {
         <main className="dashboard-main animate-fade-in">
           <div className="dashboard-header">
             <h1 className="dashboard-welcome">
-              こんにちは、<span>{user?.username}</span> さん
+              ようこそ、<span>{user?.username}</span> さん
             </h1>
             <p className="dashboard-subtitle">
-              日常で使う小さなツールを、ここからまとめて扱えるようにしていきます。
+              日常で何度も開く小さな機能を、このダッシュボードから素早く扱えるようにしていきます。
             </p>
           </div>
 
           <div className="dashboard-stats">
             <div className="stat-card">
-              <div className="stat-icon">👤</div>
+              <div className="stat-icon">ID</div>
               <div className="stat-info">
                 <div className="stat-label">ユーザー名</div>
                 <div className="stat-value">{user?.username}</div>
               </div>
             </div>
             <div className="stat-card">
-              <div className="stat-icon">🗓</div>
+              <div className="stat-icon">UP</div>
               <div className="stat-info">
                 <div className="stat-label">登録日</div>
                 <div className="stat-value">{data ? formatDate(data.createdAt) : '読み込み中...'}</div>
               </div>
             </div>
             <div className="stat-card">
-              <div className="stat-icon">🚪</div>
+              <div className="stat-icon">IN</div>
               <div className="stat-info">
                 <div className="stat-label">最終ログイン</div>
                 <div className="stat-value">{data ? formatDate(data.lastLogin) : '読み込み中...'}</div>
@@ -108,10 +110,10 @@ export function DashboardPage() {
 
           <section className="dashboard-feature-callout card">
             <div>
-              <p className="dashboard-feature-label">注目の新機能</p>
-              <h2 className="dashboard-feature-title">通勤ルートの見守り</h2>
+              <p className="dashboard-feature-label">Featured</p>
+              <h2 className="dashboard-feature-title">通勤ルートをすぐ確認</h2>
               <p className="dashboard-feature-text">
-                最寄り駅と目的地を保存しておくと、対応事業者の運行情報と、遅延時の代替検索リンクをすぐ開けます。
+                最寄り駅と目的地を保存しておくと、リアルタイム運行情報の確認と代替ルート検索をすぐ開けます。
               </p>
             </div>
             <Link to="/commute" className="btn btn-primary">
@@ -119,7 +121,7 @@ export function DashboardPage() {
             </Link>
           </section>
 
-          <h2 className="section-title">利用できるツール</h2>
+          <h2 className="section-title">使えるツール</h2>
           <div className="tools-grid">
             {TOOL_CARDS.map((tool) => {
               if (tool.to) {

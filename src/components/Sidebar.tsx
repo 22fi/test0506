@@ -9,8 +9,8 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { icon: '🏠', label: 'ダッシュボード', to: '/dashboard' },
-  { icon: '🚉', label: '通勤ルート', to: '/commute' },
+  { icon: 'DB', label: 'ダッシュボード', to: '/dashboard' },
+  { icon: 'RT', label: '通勤ルート', to: '/commute' },
 ];
 
 export function Sidebar() {
@@ -18,7 +18,7 @@ export function Sidebar() {
 
   return (
     <aside className="sidebar">
-      <span className="sidebar-section-title">メニュー</span>
+      <span className="sidebar-section-title">Navigation</span>
 
       {NAV_ITEMS.map((item) => (
         <NavLink

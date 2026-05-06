@@ -1,52 +1,56 @@
 .commute-page {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .commute-header {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 1rem;
 }
 
 .commute-eyebrow {
+  margin: 0 0 0.3rem;
   color: var(--accent);
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 0.78rem;
+  font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 0.4rem;
 }
 
 .commute-title {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
 }
 
 .commute-description {
+  margin: 0.55rem 0 0;
   color: var(--text-secondary);
   max-width: 72ch;
 }
 
 .commute-grid {
   display: grid;
-  grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+  grid-template-columns: minmax(320px, 430px) minmax(0, 1fr);
   gap: 1rem;
 }
 
 .commute-card {
-  display: flex;
-  flex-direction: column;
   gap: 1rem;
+  border-radius: 32px;
+  padding: 1.35rem;
+  background: color-mix(in srgb, var(--bg-card) 94%, transparent);
 }
 
 .commute-card-header h2,
 .commute-notes h2,
 .route-links h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.35rem;
+  margin: 0 0 0.35rem;
+  font-size: 1.15rem;
 }
 
 .commute-card-header p,
@@ -55,115 +59,104 @@
   color: var(--text-secondary);
 }
 
-.commute-form {
+.commute-form,
+.commute-status,
+.route-links {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.commute-status {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.status-summary,
+.status-item,
+.route-link-card {
+  border-radius: 26px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-input) 88%, transparent);
 }
 
 .status-summary {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem;
-  background: var(--bg-input);
-  border: 1px solid var(--border);
-  border-radius: 14px;
 }
 
 .status-route {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 1.1rem;
+  gap: 0.55rem;
+  font-size: 1.08rem;
 }
 
 .status-meta,
 .status-timestamp {
+  margin-top: 0.25rem;
   color: var(--text-muted);
   font-size: 0.85rem;
-  margin-top: 0.25rem;
 }
 
 .status-banner {
-  border-radius: 14px;
-  padding: 1rem;
-  border: 1px solid var(--border);
-  background: var(--bg-input);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  padding: 1rem;
+  border-radius: 24px;
+  border: 1px solid var(--border);
 }
 
 .status-banner.is-active {
-  border-color: rgba(74, 222, 128, 0.25);
-  background: rgba(74, 222, 128, 0.08);
+  background: var(--success-soft);
+  border-color: color-mix(in srgb, var(--success) 24%, transparent);
 }
 
 .status-banner.is-muted {
-  border-color: rgba(248, 113, 113, 0.2);
-  background: rgba(248, 113, 113, 0.08);
+  background: var(--warning-soft);
+  border-color: color-mix(in srgb, var(--warning) 24%, transparent);
 }
 
 .status-list {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.85rem;
 }
 
 .status-item {
   padding: 1rem;
-  border-radius: 14px;
-  background: var(--bg-input);
-  border: 1px solid var(--border);
 }
 
 .status-item-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
 }
 
 .status-item small {
   color: var(--text-muted);
 }
 
-.route-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
 .route-links-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
 }
 
 .route-link-card {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.4rem;
   padding: 1rem;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  background: var(--bg-input);
-  color: var(--text-primary);
-  text-decoration: none;
-  transition: border-color 0.2s ease, transform 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .route-link-card:hover {
-  border-color: var(--accent);
   transform: translateY(-2px);
+  border-color: var(--accent-soft-strong);
+}
+
+.route-link-card span {
+  color: var(--text-secondary);
+  font-size: 0.86rem;
 }
 
 .route-link-card strong {
@@ -171,14 +164,14 @@
 }
 
 .commute-notes ul {
+  display: grid;
+  gap: 0.75rem;
   padding-left: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
 }
 
-@media (max-width: 1024px) {
-  .commute-grid {
+@media (max-width: 1200px) {
+  .commute-grid,
+  .route-links-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -188,9 +181,5 @@
   .status-summary,
   .status-item-header {
     flex-direction: column;
-  }
-
-  .commute-title {
-    font-size: 1.6rem;
   }
 }
