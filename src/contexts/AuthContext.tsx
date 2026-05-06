@@ -37,7 +37,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // 初回マウント時：Cookie のトークンでユーザー情報を取得
   useEffect(() => {
-    fetchMe();
+    const timerId = window.setTimeout(() => {
+      void fetchMe();
+    }, 0);
+
+    return () => window.clearTimeout(timerId);
   }, []);
 
   async function login(email: string, password: string) {

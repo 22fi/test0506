@@ -1,8 +1,6 @@
-// src/components/Navbar.tsx
-import { Link } from 'react-router-dom';
-import { useTheme } from '../contexts/ThemeContext';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useTheme } from '../contexts/ThemeContext';
 import './Navbar.css';
 
 interface NavbarProps {
@@ -22,7 +20,7 @@ export function Navbar({ showAuth = true }: NavbarProps) {
   return (
     <nav className="navbar">
       <Link to={user ? '/dashboard' : '/'} className="navbar-brand">
-        <div className="navbar-brand-icon">🛠</div>
+        <div className="navbar-brand-icon">◎</div>
         MyTools
       </Link>
       <div className="navbar-spacer" />
@@ -30,10 +28,10 @@ export function Navbar({ showAuth = true }: NavbarProps) {
         <button
           className="theme-toggle"
           onClick={toggleTheme}
-          aria-label="テーマ切り替え"
+          aria-label="テーマを切り替える"
           title={theme === 'dark' ? 'ライトモードに切り替え' : 'ダークモードに切り替え'}
         >
-          {theme === 'dark' ? '☀️' : '🌙'}
+          {theme === 'dark' ? '☀' : '☾'}
         </button>
         {showAuth && user && (
           <button className="btn btn-ghost" onClick={handleLogout}>

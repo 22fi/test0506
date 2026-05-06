@@ -7,6 +7,7 @@ export interface Env {
   DB: D1Database;
   JWT_SECRET: string;
   INVITE_CODE: string;
+  ODPT_ACCESS_TOKEN?: string;
 }
 
 // 認証不要のパス
@@ -15,7 +16,7 @@ const PUBLIC_PATHS = [
   '/api/auth/register',
 ];
 
-export const onRequest: PagesFunction<Env, any, { userId: string }> = async (context) => {
+export const onRequest: PagesFunction<Env, string, { userId: string }> = async (context) => {
   const { request, next, env } = context;
   const url = new URL(request.url);
 

@@ -1,4 +1,3 @@
-// src/components/Sidebar.tsx
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import './Sidebar.css';
@@ -11,8 +10,7 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { icon: '🏠', label: 'ダッシュボード', to: '/dashboard' },
-  // 将来の機能をここに追加
-  // { icon: '⚙️', label: '設定', to: '/settings' },
+  { icon: '🚉', label: '通勤ルート', to: '/commute' },
 ];
 
 export function Sidebar() {
@@ -28,7 +26,7 @@ export function Sidebar() {
           to={item.to}
           className={({ isActive }) => `sidebar-link${isActive ? ' active' : ''}`}
         >
-          <span className="sidebar-link-icon">{item.icon}</span>
+          <span className="sidebar-link-icon" aria-hidden="true">{item.icon}</span>
           {item.label}
         </NavLink>
       ))}

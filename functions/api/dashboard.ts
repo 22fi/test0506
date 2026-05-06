@@ -1,7 +1,7 @@
 // functions/api/dashboard.ts
 import type { Env } from './_middleware';
 
-export const onRequestGet: PagesFunction<Env, any, { userId: string }> = async (context) => {
+export const onRequestGet: PagesFunction<Env, string, { userId: string }> = async (context) => {
   const userId = context.data.userId;
 
   const user = await context.env.DB.prepare(

@@ -1,4 +1,4 @@
-// src/pages/DashboardPage.tsx
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Navbar } from '../components/Navbar';
 import { Sidebar } from '../components/Sidebar';
@@ -12,18 +12,43 @@ interface DashboardData {
   features: unknown[];
 }
 
-const COMING_SOON_TOOLS = [
-  { icon: '📝', title: 'メモ帳', desc: 'マークダウン対応のシンプルなメモ管理' },
-  { icon: '🔗', title: 'URLショートナー', desc: '長いURLを短縮して管理する' },
-  { icon: '⏱', title: 'タイマー', desc: 'ポモドーロタイマーと時間記録' },
-  { icon: '📊', title: '家計簿', desc: '収支を記録して家計を管理する' },
+const TOOL_CARDS = [
+  {
+    icon: '🚉',
+    title: '通勤ルート',
+    desc: '最寄り駅と目的地を登録して、運行状況と代替検索をまとめて確認できます。',
+    to: '/commute',
+    badge: 'New',
+  },
+  {
+    icon: '📝',
+    title: 'メモ',
+    desc: '次に追加しやすい軽量ツールの候補です。',
+    badge: 'Coming Soon',
+  },
+  {
+    icon: '🔗',
+    title: 'URL短縮',
+    desc: '共有用リンクを整理するツール枠として確保しています。',
+    badge: 'Coming Soon',
+  },
+  {
+    icon: '⏱',
+    title: 'タイマー',
+    desc: '作業用タイマーや簡易ポモドーロなどを載せられる余地です。',
+    badge: 'Coming Soon',
+  },
 ];
 
 function formatDate(dateStr: string | null): string {
-  if (!dateStr) return 'なし';
-  return new Date(dateStr + 'Z').toLocaleString('ja-JP', {
-    year: 'numeric', month: 'numeric', day: 'numeric',
-    hour: '2-digit', minute: '2-digit',
+  if (!dateStr) return '未記録';
+
+  return new Date(dateStr.endsWith('Z') ? dateStr : `${dateStr}Z`).toLocaleString('ja-JP', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
   });
 }
 
@@ -33,8 +58,12 @@ export function DashboardPage() {
 
   useEffect(() => {
     fetch('/api/dashboard', { credentials: 'include' })
-      .then((r) => r.json())
-      .then((json) => { if (json.success) setData(json.data); })
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.success) {
+          setData(json.data);
+        }
+      })
       .catch(() => {});
   }, []);
 
@@ -44,17 +73,15 @@ export function DashboardPage() {
       <div className="dashboard-layout">
         <Sidebar />
         <main className="dashboard-main animate-fade-in">
-          {/* ウェルカムヘッダー */}
           <div className="dashboard-header">
             <h1 className="dashboard-welcome">
-              こんにちは、<span>{user?.username}</span> さん 👋
+              こんにちは、<span>{user?.username}</span> さん
             </h1>
             <p className="dashboard-subtitle">
-              今日も快適にツールをご利用ください
+              日常で使う小さなツールを、ここからまとめて扱えるようにしていきます。
             </p>
           </div>
 
-          {/* ステータスカード */}
           <div className="dashboard-stats">
             <div className="stat-card">
               <div className="stat-icon">👤</div>
@@ -64,34 +91,61 @@ export function DashboardPage() {
               </div>
             </div>
             <div className="stat-card">
-              <div className="stat-icon">📅</div>
+              <div className="stat-icon">🗓</div>
               <div className="stat-info">
                 <div className="stat-label">登録日</div>
-                <div className="stat-value">{data ? formatDate(data.createdAt) : '...'}</div>
+                <div className="stat-value">{data ? formatDate(data.createdAt) : '読み込み中...'}</div>
               </div>
             </div>
             <div className="stat-card">
-              <div className="stat-icon">🕐</div>
+              <div className="stat-icon">🚪</div>
               <div className="stat-info">
-                <div className="stat-label">前回ログイン</div>
-                <div className="stat-value">{data ? formatDate(data.lastLogin) : '...'}</div>
+                <div className="stat-label">最終ログイン</div>
+                <div className="stat-value">{data ? formatDate(data.lastLogin) : '読み込み中...'}</div>
               </div>
             </div>
           </div>
 
-          {/* ツールグリッド */}
-          <h2 className="section-title">🛠 利用可能なツール</h2>
+          <section className="dashboard-feature-callout card">
+            <div>
+              <p className="dashboard-feature-label">注目の新機能</p>
+              <h2 className="dashboard-feature-title">通勤ルートの見守り</h2>
+              <p className="dashboard-feature-text">
+                最寄り駅と目的地を保存しておくと、対応事業者の運行情報と、遅延時の代替検索リンクをすぐ開けます。
+              </p>
+            </div>
+            <Link to="/commute" className="btn btn-primary">
+              通勤ルートを開く
+            </Link>
+          </section>
+
+          <h2 className="section-title">利用できるツール</h2>
           <div className="tools-grid">
-            {COMING_SOON_TOOLS.map((tool) => (
-              <div key={tool.title} className="tool-card tool-card-coming">
-                <div className="tool-card-icon">{tool.icon}</div>
-                <div>
-                  <div className="tool-card-title">{tool.title}</div>
-                  <div className="tool-card-desc">{tool.desc}</div>
+            {TOOL_CARDS.map((tool) => {
+              if (tool.to) {
+                return (
+                  <Link key={tool.title} to={tool.to} className="tool-card">
+                    <div className="tool-card-icon">{tool.icon}</div>
+                    <div>
+                      <div className="tool-card-title">{tool.title}</div>
+                      <div className="tool-card-desc">{tool.desc}</div>
+                    </div>
+                    <span className="tool-badge">{tool.badge}</span>
+                  </Link>
+                );
+              }
+
+              return (
+                <div key={tool.title} className="tool-card tool-card-coming">
+                  <div className="tool-card-icon">{tool.icon}</div>
+                  <div>
+                    <div className="tool-card-title">{tool.title}</div>
+                    <div className="tool-card-desc">{tool.desc}</div>
+                  </div>
+                  <span className="tool-badge">{tool.badge}</span>
                 </div>
-                <span className="tool-badge">近日公開</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </main>
       </div>

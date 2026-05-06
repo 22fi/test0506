@@ -1,12 +1,12 @@
-// src/App.tsx
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider } from './contexts/ThemeContext';
-import { AuthProvider } from './contexts/AuthContext';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { ProtectedRoute } from './components/ProtectedRoute';
-import { LandingPage }   from './pages/LandingPage';
-import { LoginPage }     from './pages/LoginPage';
-import { RegisterPage }  from './pages/RegisterPage';
+import { AuthProvider } from './contexts/AuthContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import { DashboardPage } from './pages/DashboardPage';
+import { CommutePage } from './pages/CommutePage';
+import { LandingPage } from './pages/LandingPage';
+import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
 
 export default function App() {
   return (
@@ -25,7 +25,14 @@ export default function App() {
                 </ProtectedRoute>
               }
             />
-            {/* 未定義パスはトップへ */}
+            <Route
+              path="/commute"
+              element={
+                <ProtectedRoute>
+                  <CommutePage />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </BrowserRouter>
